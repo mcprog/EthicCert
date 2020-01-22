@@ -1,0 +1,28 @@
+
+<div class="datalist">
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>Name<input placeholder="Filter"></th>
+            <th>Price<button class="pure-button"><fa-icon [icon]="faSortNumericDown"></fa-icon></button></th>
+            <th>Vendor<input placeholder="Filter"></th>
+            <th>Tags</th>
+            <th><button class="pure-button" (click)="selectAllClicked()">{{selectVerb}} All</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products | async">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.vendor }}</td>
+                <td>
+                    <select>
+                        <option>{{ product.tags.length }}</option>
+                        <option *ngFor="let tag of product.tags">{{ tag }}</option>
+                    </select>
+                </td>
+                <td>radio</td>
+        </tr>
+    </tbody>
+</table>
+</div>

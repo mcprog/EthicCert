@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+@paynegray: #466C7A;
+@straw: #D8D879;
+@tan: #D8CB91;
+@darkvanilla: #D8C0A2;
+@lilac: #D1A5B8;
+
+
+.gradient {
+    background: linear-gradient(to right, @straw 75%, @darkvanilla);
+}
+
+.white-link {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    .gradient();
+    color: white;
+    padding: 16px;
+
+    .brand {
+        .white-link();
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    span {
+        padding-left: 20px;
+        font-style: italic;
+        
+        a {
+            .white-link();
+        }
+    }
+}
+
+.pure-menu {
+    border-bottom: 2px solid @darkvanilla;
+    .pure-menu-link {
+        width: 150px;
+    }
+}
+
+.section-right {
+    margin-left: .5em;
+    margin-top: .5em;
+    margin-right: 1em;
+    padding: 10px;
+}
+
+.section-left {
+    margin-left: 1em;
+    margin-top: .5em;
+    margin-right: .5em;
+    padding: 10px;
+}
+
+.datalist {
+    
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    width: fit-content;
+    .section-right();
+    width: inherit;
+    .pure-table {
+        width: 100%;
+    }
+}
+
+
+
+.sidebar {
+    background: @paynegray;
+    .section-left();
+    color: white;
+}
+
+hr {
+    border: 1px solid white;
+}
