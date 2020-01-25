@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faSortAlphaDown, faSortNumericDown } from '@fortawesome/free-solid-svg-icons'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Product } from '../product';
 
-export interface Product { name: string, price: number, vendor: string, tags: string[] };
+//export interface Product { name: string, price: number, vendor: string, tags: string[] };
 
 @Component({
   selector: 'app-fillerlist',

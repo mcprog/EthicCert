@@ -12,6 +12,7 @@ import { TagsComponent } from './tags/tags.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CoolstatsComponent } from './coolstats/coolstats.component';
 import { FillerlistComponent } from './fillerlist/fillerlist.component';
+import { AddproductComponent } from './addproduct/addproduct.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FillerlistComponent } from './fillerlist/fillerlist.component';
     TagsComponent,
     NavbarComponent,
     CoolstatsComponent,
-    FillerlistComponent
+    FillerlistComponent,
+    AddproductComponent
   ],
   imports: [
     BrowserModule,

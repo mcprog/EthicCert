@@ -7,10 +7,11 @@
             <th>Price<button class="pure-button"><fa-icon [icon]="faSortNumericDown"></fa-icon></button></th>
             <th>Vendor<input placeholder="Filter"></th>
             <th>Tags</th>
-            <th><button class="pure-button" (click)="selectAllClicked()">{{selectVerb}} All</button></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
+            
         <tr *ngFor="let product of products | async">
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
@@ -21,8 +22,11 @@
                         <option *ngFor="let tag of product.tags">{{ tag }}</option>
                     </select>
                 </td>
-                <td>radio</td>
+                <td>
+                    <button class="pure-button pure-button-primary">Edit</button>
+                </td>
         </tr>
+        
     </tbody>
 </table>
 </div>

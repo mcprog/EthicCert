@@ -1,0 +1,31 @@
+<div class="datalist">
+    <h3>Product</h3>
+    <form class="pure-form pure-g">
+        <div class="pure-u-1-5">
+            <p>Name</p>
+            <input value="{{product.name}}">
+        </div>
+        <div class="pure-u-1-5">
+            <p>Price</p>
+            <input value="{{product.price}}">
+        </div>
+        <div class="pure-u-1-5">
+            <p>Tags</p>
+            <div *ngFor="let tag of product.tags">
+                {{tag}}
+                <button class="pure-button">x</button>
+                
+            </div>
+           <input placeholder="New tag">
+
+        </div>
+        <div class="pure-u-1-5">
+            <p>Vendor</p>
+            <input value="{{product.vendor}}">
+        </div>
+        <div class="pure-u-1-5">
+            <p>Status: {{getStatus()}}</p>
+            <button class="pure-button pure-button-primary">Update</button>
+        </div>
+    </form>
+</div>
