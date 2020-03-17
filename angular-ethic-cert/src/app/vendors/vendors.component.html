@@ -1,0 +1,21 @@
+<div class="holder">
+    <h3>Vendors</h3>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let vendor of vendors">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{vendor.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{vendor.products.length}} products
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+            <mat-list-item *ngFor="let product of vendor.products">
+                {{product.name}}
+                <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
+</div>

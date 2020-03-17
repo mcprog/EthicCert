@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { faSortAlphaDown, faSortNumericDown } from '@fortawesome/free-solid-svg-icons'
+import { faSortAlphaDown, faSortNumericDown, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Product } from '../product';
+import { RestService } from '../rest.service'
 
 //export interface Product { name: string, price: number, vendor: string, tags: string[] };
 
@@ -15,14 +16,17 @@ export class FillerlistComponent implements OnInit {
 
   faSortAlphaDown = faSortAlphaDown;
   faSortNumericDown = faSortNumericDown;
+  faSyncAlt = faSyncAlt;
 
   selectVerb = "Select";
   private productCollection: AngularFirestoreCollection<Product>;
   products: Observable<Product[]>;
+  restService : RestService;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private rest : RestService) {
     this.productCollection = db.collection<Product>('products');
     this.products = this.productCollection.valueChanges();
+    this.restService = rest;
   }
   addProduct(product: Product) {
     this.productCollection.add(product);
@@ -37,6 +41,9 @@ export class FillerlistComponent implements OnInit {
     } else {
       this.selectVerb = "Select";
     }
+  }
+
+  loadProducts() {
   }
 
 }

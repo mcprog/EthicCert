@@ -1,0 +1,19 @@
+<div class="holder">
+    <h3>Categories</h3>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let category of categories">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{category.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{category.description}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h4>Tags</h4>
+        <mat-chip-list>
+            <mat-chip *ngFor="let tag of category.tags">{{tag.name}}</mat-chip>
+        </mat-chip-list>
+    </mat-expansion-panel>
+</mat-accordion>
+</div>
