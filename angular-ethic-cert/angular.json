@@ -28,11 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less",
-              "node_modules/purecss"
+              "src/custom-theme.scss",
+              "src/styles.less"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -126,6 +125,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "angular-ethic-cert"
 }
