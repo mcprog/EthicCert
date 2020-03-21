@@ -1,6 +1,6 @@
 <div class="holder">
 <h3>Tags</h3>
-<table mat-table [dataSource]="tagList" class="mat-elevation-z8">
+<table mat-table [dataSource]="tags | async" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -8,7 +8,7 @@
 
     <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef>Catgory</th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        <td mat-cell *matCellDef="let element"> {{getPath(element.category)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">

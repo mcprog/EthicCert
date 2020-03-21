@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 
 
@@ -27,9 +29,19 @@ const tempTags: Tag[] = [
 export class TaglistComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'category', 'description', 'weight', 'edit'];
-  tagList = tempTags;
 
-  constructor() { }
+
+  tags: Observable<Tag[]>;
+  private tagsCollection: AngularFirestoreCollection<Tag>;
+
+  constructor(private db : AngularFirestore) {
+    this.tagsCollection = db.collection<Tag>('tags');
+    this.tags = this.tagsCollection.valueChanges();
+  }
+
+  getPath(docRef: DocumentReference): string {
+    return docRef.path;
+  }
 
   ngOnInit() {
   }

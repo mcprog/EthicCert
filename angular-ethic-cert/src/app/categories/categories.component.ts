@@ -3,7 +3,7 @@ import { Tag } from '../taglist/taglist.component';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-export interface Category {
+export interface Category extends Data {
   name: string;
   description: string;
   tags: Tag[];
