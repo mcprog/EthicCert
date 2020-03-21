@@ -1,7 +1,7 @@
 <div class="holder">
     <h3>Products</h3>
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let product of products">
+    <mat-expansion-panel *ngFor="let product of products | async">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{product.name}}
@@ -12,12 +12,12 @@
         </mat-expansion-panel-header>
         <span>
             <h4>Vendor</h4>
-            {{product.vendor}}
+            {{getVendor(product.vendor)}}
         </span>
         <span>
             <h4>Tags</h4>
             <mat-chip-list>
-                <mat-chip *ngFor="let tag of product.tags">{{tag}}</mat-chip>
+                <mat-chip *ngFor="let tag of product.tags">{{getTag(tag)}}</mat-chip>
             </mat-chip-list>
         </span>
         <mat-action-row>

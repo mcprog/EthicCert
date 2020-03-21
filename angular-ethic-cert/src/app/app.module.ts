@@ -28,6 +28,9 @@ import { MatListModule } from '@angular/material/list';
 import { ProductsComponent } from './products/products.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { CoolstatsComponent } from './coolstats/coolstats.component';
+import { FillerlistComponent } from './fillerlist/fillerlist.component';
+import { AddproductComponent } from './addproduct/addproduct.component'; 
 
 const appRoutes: Routes = [
   { path: 'products', component: ProductsComponent },
@@ -45,7 +48,10 @@ const appRoutes: Routes = [
     TaglistComponent,
     ProductsComponent,
     VendorsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    AddproductComponent,
+    FillerlistComponent,
+    CoolstatsComponent
   ],
   imports: [
     RouterModule.forRoot(

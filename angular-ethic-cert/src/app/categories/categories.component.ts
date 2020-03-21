@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from '../taglist/taglist.component';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 export interface Category {
   name: string;
@@ -27,9 +29,18 @@ const tempCategories: Category[] = [
 })
 export class CategoriesComponent implements OnInit {
 
-  categories = tempCategories;
 
-  constructor() { }
+  categories: Observable<Category[]>;
+  private categoryCollection: AngularFirestoreCollection<Category>;
+
+  constructor(private db : AngularFirestore) {
+    this.categoryCollection = db.collection<Category>('categories');
+    this.categories = this.categoryCollection.valueChanges();
+  }
+
+  getPath(docRef: DocumentReference): string {
+    return docRef.path;
+  }
 
   ngOnInit() {
   }

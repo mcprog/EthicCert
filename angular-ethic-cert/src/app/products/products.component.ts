@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 
 export interface Product {
@@ -7,13 +9,6 @@ export interface Product {
   tags: string[];
 }
 
-const tempProducts: Product[] = [
-  {name: "ProductA", vendor: "Vendor1", tags: ["tag1", "tag2", "tag3", "tag4"]},
-  {name: "ProductB", vendor: "Vendor1", tags: ["tag1", "tag4"]},
-  {name: "ProductC", vendor: "Vendor2", tags: ["tag1", "tag2", "tag3", "tag5"]},
-  {name: "ProductD", vendor: "Vendor3", tags: []},
-];
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -21,9 +16,22 @@ const tempProducts: Product[] = [
 })
 export class ProductsComponent implements OnInit {
 
-  products = tempProducts;
+  products: Observable<Product[]>;
+  private productsCollection: AngularFirestoreCollection<Product>;
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { 
+    this.productsCollection = db.collection<Product>('products');
+    this.products = this.productsCollection.valueChanges();
+    
+  }
+
+  getVendor(vendorRef: DocumentReference): string {
+    return vendorRef.path;
+  }
+
+  getTag(tagRef: DocumentReference): string {
+    return tagRef.path;
+  }
 
   ngOnInit() {
   }
