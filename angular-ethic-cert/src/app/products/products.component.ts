@@ -1,12 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Tag } from '../taglist/taglist.component';
+import { map } from 'rxjs/operators';
 
 
 export interface Product {
   name: string;
-  vendor: string;
+  vendor: any;
+  tags: any[];
+  
+}
+
+export class ParsedProduct implements Product {
+  name: string;  vendor: any;
   tags: string[];
+  parsed: string[];
+
+  constructor() {
+    //this.parsed = new string[this.tags.length];
+    for (let i = 0; i < this.tags.length; ++i) {
+      this.parsed[i] = "test";
+    }
+  }
+
+  
 }
 
 @Component({
@@ -18,22 +36,39 @@ export class ProductsComponent implements OnInit {
 
   products: Observable<Product[]>;
   private productsCollection: AngularFirestoreCollection<Product>;
+  snapshot: any;
 
-  constructor(private db: AngularFirestore) { 
-    this.productsCollection = db.collection<Product>('products');
-    this.products = this.productsCollection.valueChanges();
-    
+  constructor(private afs: AngularFirestore) {  
   }
 
-  getVendor(vendorRef: DocumentReference): string {
-    return vendorRef.path;
+  private lookupVendor(data: Product) {
+    data.vendor.get().then(snap => {
+      data.vendor = snap.get('name');
+    });
   }
 
-  getTag(tagRef: DocumentReference): string {
-    return tagRef.path;
+  private lookupTags(data: Product) {
+    for (let i = 0; i < data.tags.length; ++i) {
+      data.tags[i].get().then(snap => {
+        data.tags[i] = snap.get('name');
+      });
+    }  
   }
 
   ngOnInit() {
+    this.productsCollection = this.afs.collection('products', ref => {
+      return ref.orderBy('name', 'asc');
+    })
+    this.products = this.productsCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Product;
+        this.lookupVendor(data);
+        this.lookupTags(data);
+        return data;
+      }))
+    );
   }
+
+  
 
 }
