@@ -47,12 +47,20 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  noTags(tags: string[]): string {
+    if (tags.length == 0) {
+      return "No tags";
+    }
+    return "";
+  }
+
   private lookupTags(data: Product) {
     for (let i = 0; i < data.tags.length; ++i) {
       data.tags[i].get().then(snap => {
         data.tags[i] = snap.get('name');
       });
-    }  
+    } 
+    
   }
 
   ngOnInit() {

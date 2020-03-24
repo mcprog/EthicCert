@@ -16,8 +16,9 @@
         </span>
         <span>
             <h4>Tags</h4>
+            <i>{{noTags(product.tags)}}</i>
             <mat-chip-list>
-                <mat-chip *ngFor="let tag of product.tags">{{tag}}</mat-chip>
+                <mat-chip *ngFor="let tag of product.tags" color="accent" selected>{{tag}}</mat-chip>
             </mat-chip-list>
         </span>
         <mat-action-row>
