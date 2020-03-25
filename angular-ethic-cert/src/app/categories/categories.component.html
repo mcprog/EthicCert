@@ -13,8 +13,9 @@
         <h4>Description</h4>
         <p>{{category.description}}</p>
         <h4>Tags</h4>
+        <i>{{noTags(category.tags)}}</i>
         <mat-chip-list>
-            <mat-chip *ngFor="let tag of category.tags">{{getPath(tag)}}</mat-chip>
+            <mat-chip *ngFor="let tag of category.tags">{{tag}}</mat-chip>
         </mat-chip-list>
     </mat-expansion-panel>
 </mat-accordion>
