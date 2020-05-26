@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faSortAlphaDown, faSortNumericDown, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Product } from '../product';
@@ -14,9 +13,7 @@ import { RestService } from '../rest.service'
 })
 export class FillerlistComponent implements OnInit {
 
-  faSortAlphaDown = faSortAlphaDown;
-  faSortNumericDown = faSortNumericDown;
-  faSyncAlt = faSyncAlt;
+
 
   selectVerb = "Select";
   private productCollection: AngularFirestoreCollection<Product>;

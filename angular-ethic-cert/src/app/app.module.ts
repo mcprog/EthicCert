@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -70,7 +69,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    FontAwesomeModule,
+    
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
  	  AngularFirestoreModule,
