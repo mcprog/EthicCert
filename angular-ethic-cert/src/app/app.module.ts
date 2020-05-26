@@ -32,8 +32,16 @@ import { CoolstatsComponent } from './coolstats/coolstats.component';
 import { FillerlistComponent } from './fillerlist/fillerlist.component';
 import { AddproductComponent } from './addproduct/addproduct.component'; 
 
+import { AuthService } from './auth.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
+import { LandingComponent } from './landing/landing.component';
+import { AuthGuardGuard } from './auth-guard.guard';
+
 const appRoutes: Routes = [
-  { path: 'products', component: ProductsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LandingComponent },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuardGuard] },
   { path: 'taglist', component: TaglistComponent },
   { path: 'vendors', component: VendorsComponent },
   { path: 'categories', component: CategoriesComponent }
@@ -51,12 +59,14 @@ const appRoutes: Routes = [
     CategoriesComponent,
     AddproductComponent,
     FillerlistComponent,
-    CoolstatsComponent
+    CoolstatsComponent,
+    LandingComponent
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes, { enableTracing: true } //deebugging only
+      appRoutes, { enableTracing: true, useHash: false } //deebugging only
     ),
+  
     BrowserModule,
     HttpClientModule,
     HttpClientJsonpModule,
@@ -65,6 +75,8 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
  	  AngularFirestoreModule,
     BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
 
     MatSliderModule,
     MatToolbarModule,
@@ -76,7 +88,7 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatListModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

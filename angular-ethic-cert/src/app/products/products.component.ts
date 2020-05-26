@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 export interface Product {
   name: string;
-  vendor: any;
+  vendor: string;
   tags: any[];
   
 }
@@ -42,19 +42,32 @@ export class ProductsComponent implements OnInit {
   }
 
   private lookupVendor(data: Product) {
-    data.vendor.get().then(snap => {
+    /*data.vendor.get().then(snap => {
       data.vendor = snap.get('name');
-    });
+    });*/
+  }
+
+  numTags(tags: string[]): string {
+    if (!tags) {
+      return "0 tags applied";
+    }
+    if (tags.length == 1) {
+      return "1 tag applied";
+    }
+    return tags.length + " tags applied";
   }
 
   noTags(tags: string[]): string {
-    if (tags.length == 0) {
+    if (!tags || tags.length == 0) {
       return "No tags";
     }
     return "";
   }
 
   private lookupTags(data: Product) {
+    if (!data.tags) {
+      return;
+    }
     for (let i = 0; i < data.tags.length; ++i) {
       data.tags[i].get().then(snap => {
         data.tags[i] = snap.get('name');
@@ -70,7 +83,7 @@ export class ProductsComponent implements OnInit {
     this.products = this.productsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Product;
-        this.lookupVendor(data);
+        //this.lookupVendor(data);
         this.lookupTags(data);
         return data;
       }))

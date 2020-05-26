@@ -1,7 +1,12 @@
 <mat-toolbar color="primary" class="mat-elevation-z5">
     <span>EthicCert</span>
+    
+  
     <a mat-button routerLink="/products" routerLinkActive="active-link">Products</a>
     <a mat-button routerLink="/taglist" routerLinkActive="active-link">Tags</a>
     <a mat-button routerLink="/vendors" routerLinkActive="active-link">Vendors</a>
     <a mat-button routerLink="/categories" routerLinkActive="active-link">Categories</a>
+    <span class="fill-space"></span>
+    <span>{{authService.user.displayName}}</span>
+    
 </mat-toolbar>

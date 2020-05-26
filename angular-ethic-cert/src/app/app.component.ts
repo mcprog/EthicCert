@@ -8,3 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'EthicCert';
 }
+
+// to build: ng build; firebase deploy --only hosting
