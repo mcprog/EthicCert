@@ -11,10 +11,9 @@ import { AuthService } from '../auth.service';
 })
 export class LandingComponent implements OnInit {
 
-  
+  loading = false;
 
   constructor(public authService: AuthService) { 
-    
   }
 
   ngOnInit() {
@@ -23,7 +22,9 @@ export class LandingComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
     this.authService.login();
+    
   }
 
 }

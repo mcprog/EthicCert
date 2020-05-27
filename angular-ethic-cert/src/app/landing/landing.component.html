@@ -2,8 +2,11 @@
     <span>EthicCert</span>
     
     <span class="fill-space"></span>
-    <button type="button" mat-button (click)="authService.login()">Google sign-in</button>
- 
+    <div *ngIf="loading; else elseBlock"><span>loading..</span></div>
+    <ng-template #elseBlock>
+        <button type="button" mat-button (click)="login()">Google sign-in</button>
+    </ng-template>
+    
     
     
 </mat-toolbar>

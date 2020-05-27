@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 
 import { auth, User } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +12,39 @@ import { switchMap } from 'rxjs/operators';
 export class AuthService {
   public user: User = null;
   public oldUrl: string;
+  public inDatabase = false;
 
-  constructor(private afAuth: AngularFireAuth, private ngZone: NgZone, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private ngZone: NgZone, private router: Router, private firestore: AngularFirestore) {
+  }
+
+  reset() {
+    this.logout();
+    this.inDatabase = false;
+    this.user = null;
   }
 
   listenLogin() {
-    this.afAuth.auth.getRedirectResult().then(result => this.ngZone.run(() => {
+    this.afAuth.auth.getRedirectResult().then(result => this.ngZone.run(async () => {
       if (result.user) {
-         this.user = result.user;
-         console.log(this.user.displayName);
-         this.router.navigate(['/products']);
-         console.log(this.user.displayName);
+        this.user = result.user;
+        
+        var docRef = this.firestore.collection('users').doc(this.user.email).ref;
+        var b: boolean;
+        await docRef.get().then(function(doc) {
+          b = doc.exists;
+          console.log("b inside" + b);
+        });
+        console.log("b after" + b);
+        this.router.navigate(['/products']);
+        this.inDatabase = b;
       }
    }));
 
   }
 
+
   isLoggedIn(): boolean {
-    return this.user != null;
+    return this.user != null && this.inDatabase;
   }
 
   getUser(): User {
@@ -48,6 +61,7 @@ export class AuthService {
 
   login() {
     const provider = new auth.GoogleAuthProvider();
+    
     this.afAuth.auth.signInWithRedirect(provider);
   }
 }

@@ -36,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuardGuard] },
   { path: 'taglist', component: TaglistComponent },
   { path: 'vendors', component: VendorsComponent },
-  { path: 'categories', component: CategoriesComponent }
+  { path: 'categories', component: CategoriesComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 
@@ -59,7 +61,8 @@ const appRoutes: Routes = [
     AddproductComponent,
     FillerlistComponent,
     CoolstatsComponent,
-    LandingComponent
+    LandingComponent,
+    NotFoundComponent
   ],
   imports: [
     RouterModule.forRoot(

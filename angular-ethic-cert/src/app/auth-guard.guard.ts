@@ -18,9 +18,14 @@ export class AuthGuardGuard implements CanActivate {
       return true;
     }
     this.authService.oldUrl = oldUrl;
-    this.router.navigate(['/login']);
+
+    this.kickout();
 
     return false;
+  }
+
+  kickout() {
+    this.router.navigate(['/login']);
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
