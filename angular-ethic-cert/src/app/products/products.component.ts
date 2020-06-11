@@ -3,9 +3,12 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable } from 'rxjs';
 import { Tag } from '../taglist/taglist.component';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { PreviewComponent } from '../preview/preview.component';
+import { Product } from '../product';
 
 
-export interface Product {
+/*export interface Product {
   name: string;
   vendor: string;
   tags: any[];
@@ -25,7 +28,8 @@ export class ParsedProduct implements Product {
   }
 
   
-}
+}*/
+
 
 @Component({
   selector: 'app-products',
@@ -38,13 +42,17 @@ export class ProductsComponent implements OnInit {
   private productsCollection: AngularFirestoreCollection<Product>;
   snapshot: any;
 
-  constructor(private afs: AngularFirestore) {  
+  constructor(private afs: AngularFirestore, private router: Router) {  
   }
 
   private lookupVendor(data: Product) {
     /*data.vendor.get().then(snap => {
       data.vendor = snap.get('name');
     });*/
+  }
+
+  preview(product: Product) {
+    this.router.navigate(['/preview', product.id]);
   }
 
   numTags(tags: string[]): string {
@@ -82,13 +90,16 @@ export class ProductsComponent implements OnInit {
     })
     this.products = this.productsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
+        const id = a.payload.doc.id
         const data = a.payload.doc.data() as Product;
+        data.id = id;
         //this.lookupVendor(data);
         this.lookupTags(data);
         return data;
       }))
     );
   }
+
 
   
 

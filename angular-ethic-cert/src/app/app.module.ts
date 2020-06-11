@@ -23,13 +23,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ProductsComponent } from './products/products.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CoolstatsComponent } from './coolstats/coolstats.component';
 import { FillerlistComponent } from './fillerlist/fillerlist.component';
-import { AddproductComponent } from './addproduct/addproduct.component'; 
 
 import { AuthService } from './auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -37,14 +38,16 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PreviewComponent } from './preview/preview.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LandingComponent },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuardGuard] },
-  { path: 'taglist', component: TaglistComponent },
-  { path: 'vendors', component: VendorsComponent },
-  { path: 'categories', component: CategoriesComponent },
+  { path: 'taglist', component: TaglistComponent, canActivate: [AuthGuardGuard] },
+  { path: 'vendors', component: VendorsComponent, canActivate: [AuthGuardGuard] },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardGuard] },
+  { path: 'preview/:id', component: PreviewComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -58,11 +61,11 @@ const appRoutes: Routes = [
     ProductsComponent,
     VendorsComponent,
     CategoriesComponent,
-    AddproductComponent,
     FillerlistComponent,
     CoolstatsComponent,
     LandingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PreviewComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -88,7 +91,9 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatDividerModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

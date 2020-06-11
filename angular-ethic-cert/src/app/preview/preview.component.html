@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-title>
+        {{product.name}}
+    </mat-card-title>
+    <mat-card-subtitle>
+        {{product.id}}
+    </mat-card-subtitle>
+    <mat-card-content>
+        Vendor: {{product.vendor}}
+        Score: {{score}}
+        <mat-list>
+            <div *ngFor="let category of categories">
+                <h3>{{category}}</h3>
+                <i>{{getCategoryTooltip(category)}}</i>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let tag of getCategorizedTags(category)" color="accent" matTooltip="{{getTooltip(tag)}}">{{tag}}</mat-chip>
+                </mat-chip-list>
+            </div>
+            
+        </mat-list>
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-chip-list>
+            <mat-chip *ngFor="let tag of product.tags" color="accent" matTooltip="{{getTooltip(tag)}}">{{tag}}</mat-chip>
+        </mat-chip-list>
+    </mat-card-footer>
+</mat-card>

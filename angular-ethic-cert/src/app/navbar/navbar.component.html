@@ -7,6 +7,7 @@
     <a mat-button routerLink="/vendors" routerLinkActive="active-link">Vendors</a>
     <a mat-button routerLink="/categories" routerLinkActive="active-link">Categories</a>
     <span class="fill-space"></span>
+    <mat-icon>account_box</mat-icon>
     <span class="userName">{{authService.user.displayName}}</span>
     <button type="button" mat-button (click)="authService.logout()">Logout</button>
     

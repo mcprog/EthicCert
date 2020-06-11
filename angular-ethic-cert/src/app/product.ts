@@ -1,3 +1,6 @@
 export interface Product {
-    name: string, price: number, vendor: string, tags: string[] 
-};
+    id: string;
+    name: string;
+    vendor: string;
+    tags: any[]; 
+  }
