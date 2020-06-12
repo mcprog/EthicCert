@@ -56,7 +56,7 @@ const appRoutes: Routes = [
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardGuard] },
   { path: 'preview/:id', component: PreviewComponent },
   { path: 'edit-tag/:id', component: EditTagComponent, canActivate: [AuthGuardGuard] },
-  { path: 'assign-tags/:id', component: AssignTagsComponent },
+  { path: 'assign-tags/:id', component: AssignTagsComponent, canActivate: [AuthGuardGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 
