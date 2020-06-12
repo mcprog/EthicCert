@@ -1,0 +1,11 @@
+<div class="holder">
+    <h4>{{product.name}}</h4>
+    <p>{{id}}</p>
+
+    <mat-selection-list>
+        <mat-list-option *ngFor="let tag of tags | async" [selected]="true">{{tag.name}}</mat-list-option>
+    </mat-selection-list>
+
+    <button mat-flat-button color="primary">Update</button>
+    NYI fully.
+</div>

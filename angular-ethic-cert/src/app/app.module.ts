@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { Routes, RouterModule } from '@angular/router';
 import { TaglistComponent } from './taglist/taglist.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,6 +26,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule, MatSelectModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductsComponent } from './products/products.component';
 import { VendorsComponent } from './vendors/vendors.component';
@@ -39,6 +44,8 @@ import { LandingComponent } from './landing/landing.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PreviewComponent } from './preview/preview.component';
+import { EditTagComponent } from './edit-tag/edit-tag.component';
+import { AssignTagsComponent } from './assign-tags/assign-tags.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -48,6 +55,8 @@ const appRoutes: Routes = [
   { path: 'vendors', component: VendorsComponent, canActivate: [AuthGuardGuard] },
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardGuard] },
   { path: 'preview/:id', component: PreviewComponent },
+  { path: 'edit-tag/:id', component: EditTagComponent, canActivate: [AuthGuardGuard] },
+  { path: 'assign-tags/:id', component: AssignTagsComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -65,7 +74,9 @@ const appRoutes: Routes = [
     CoolstatsComponent,
     LandingComponent,
     NotFoundComponent,
-    PreviewComponent
+    PreviewComponent,
+    EditTagComponent,
+    AssignTagsComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -93,7 +104,12 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatListModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

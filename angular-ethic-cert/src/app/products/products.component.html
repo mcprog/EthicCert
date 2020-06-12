@@ -5,7 +5,7 @@
     <mat-expansion-panel *ngFor="let product of products | async">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{product.name}}{{product.id}}
+                {{product.name}}
             </mat-panel-title>
             <mat-panel-description>
                 {{numTags(product.tags)}}
@@ -24,7 +24,7 @@
         </span>
         <mat-action-row>
             <button mat-flat-button color="primary" (click)="preview(product)">Preview</button>
-            <button mat-flat-button color="primary">Edit Tags</button>
+            <button mat-flat-button color="primary" routerLink="/assign-tags/{{product.id}}">Assign Tags</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

@@ -8,11 +8,7 @@ import { Tag } from "../tag";
 })
 export class TagsComponent implements OnInit {
 
-  tag: Tag = {
-    id: 0,
-    name: "TestTag",
-    weight: 1.0
-  };
+  //not used at all?
 
   constructor() { }
 

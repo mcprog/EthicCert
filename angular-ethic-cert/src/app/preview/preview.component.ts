@@ -38,13 +38,16 @@ export class PreviewComponent implements OnInit {
         var category = snap.get("category");
         category.get().then(snap2 => {
           category = snap2.get('name');
-          that.categories.push(category);
+          if (!that.categories.includes(category)) {
+            that.categories.push(category);
+          }
           that.categoryTooltips[category] = snap2.get('description');
           if (category in that.categorizedTags) {
-            that.categorizedTags.push(data.tags[i]);
+            that.categorizedTags[category].push(data.tags[i]);
           } else {
-            that.categorizedTags = [data.tags[i]];
+            that.categorizedTags[category] = [data.tags[i]];
           }
+          console.log(that.categorizedTags);
         });
         
 

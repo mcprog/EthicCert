@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<form [formGroup]="options" class="wrapper">
+    <h4>Id: {{id}}</h4>
+    <mat-divider></mat-divider>
+    <mat-form-field appearance="outline">
+        <mat-label>Tag Name</mat-label>
+        <input matInput placeholder="Enter tag name" [formControl]="nameControl">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Tag Description</mat-label>
+        <textarea matInput [formControl]="descriptionControl"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Tag Category</mat-label>
+        <mat-select [formControl]="categoryControl">
+            <mat-option *ngFor="let category of categories | async" value="{{category.id}}">{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+        <span class="weight-label">Weight</span>
+        <mat-slider [formControl]="weightControl" thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-10" max="10" value="{{weight}}"></mat-slider>
+    <br>
+    <button mat-flat-button color="primary" (click)="updateTag()">Update</button>
+</form>

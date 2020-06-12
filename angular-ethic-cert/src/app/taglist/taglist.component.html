@@ -26,7 +26,7 @@
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>Edit</th>
         <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="primary" routerLink="/edit-tag/{{element.id}}"><mat-icon>edit</mat-icon></button>
         </td>
     </ng-container>
 

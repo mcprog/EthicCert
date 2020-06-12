@@ -1,24 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Tag } from '../tag';
 
 
 
-export interface Tag {
-  name: string;
-  category: string;
-  description: string;
-  weight: number;
-}
 
 
 
-const tempTags: Tag[] = [
-    { name: 'tag1', category: 'cate1', description: "desc1", weight: 0.3 },
-    { name: 'tag2', category: 'cate2', description: "desc2", weight: 0.35 },
-    { name: 'tag3', category: 'cate3', description: "desc3", weight: -0.235 },
-    { name: 'tag4', category: 'cate4', description: "desc4", weight: 0.125 },
-]
+
+
 
 @Component({
   selector: 'app-taglist',
@@ -36,7 +28,16 @@ export class TaglistComponent implements OnInit {
 
   constructor(private db : AngularFirestore) {
     this.tagsCollection = db.collection<Tag>('tags');
-    this.tags = this.tagsCollection.valueChanges();
+    this.tags = this.tagsCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const id = a.payload.doc.id;
+        const data = a.payload.doc.data() as Tag;
+        data.id = id;
+
+        return data;
+      }))
+    );
+    
   }
 
   getPath(docRef: DocumentReference): string {

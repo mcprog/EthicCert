@@ -1,34 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Tag } from '../taglist/taglist.component';
+import { Tag } from '../tag';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { PreviewComponent } from '../preview/preview.component';
 import { Product } from '../product';
 
 
-/*export interface Product {
-  name: string;
-  vendor: string;
-  tags: any[];
-  
-}
-
-export class ParsedProduct implements Product {
-  name: string;  vendor: any;
-  tags: string[];
-  parsed: string[];
-
-  constructor() {
-    //this.parsed = new string[this.tags.length];
-    for (let i = 0; i < this.tags.length; ++i) {
-      this.parsed[i] = "test";
-    }
-  }
-
-  
-}*/
 
 
 @Component({

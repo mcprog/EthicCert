@@ -28,6 +28,10 @@ export class AuthGuardGuard implements CanActivate {
     this.router.navigate(['/login']);
   }
 
+  notFound() {
+    this.router.navigate(['/not-found']);
+  }
+
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.checkLogin(state.url);
   }
